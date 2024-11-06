@@ -10,8 +10,46 @@ class TTTBoard:
             represent moves by player 'O' and '*'s are spots no one has yet played on
     """
 
-    pass
+    def __init__(self):
 
+        self.board = ['*', '*','*','*','*','*','*','*' ,'*']
+    
+    def __str__(self):
+        str = ""
+        for i, val in enumerate(self.board):
+            str += val
+            if i == 2 or 1 == 5:
+                str += "\n"
+            return str 
+    def make_move(self,player,pos):
+        if self.board[pos] == "*":
+            self.board[pos] = player
+            return True
+        else:
+            return False 
+    def has_won(self,player):
+            places = {}
+            for i, val in enumerate (self.board):
+                if val == player:
+                    places.append(1)
+            winning = [
+                [0,3,6],
+                [1,4,7],
+                [2,5,8],
+                [0,1,2],
+                [3,4,5],
+                [6,7,8],
+                [0,4,8],
+                [2,4,6]
+            ]
+            main_set = set(places)
+            for sublist in winning:
+              if set(sublist).issubset(main_set):
+                return True
+            return False 
+
+    
+    
 
 def play_tic_tac_toe() -> None:
     """Uses your class to play TicTacToe"""
